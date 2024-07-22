@@ -9,6 +9,5 @@ namespace App\Repositories\Interfaces;
 
 interface BaseRepositoryInterface
 {
-    // public function create($payload);
 
 }

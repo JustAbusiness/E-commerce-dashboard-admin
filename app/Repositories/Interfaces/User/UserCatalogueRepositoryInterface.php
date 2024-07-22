@@ -9,5 +9,6 @@ namespace App\Repositories\Interfaces\User;
 
  interface UserCatalogueRepositoryInterface
  {
-     public function create(array $payload = []);
+    public function create(array $payload = []);
+    public function pagination(array $param = []);
  }

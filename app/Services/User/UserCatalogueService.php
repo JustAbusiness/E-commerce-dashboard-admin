@@ -19,9 +19,13 @@ class UserCatalogueService implements UserCatalogueServiceInterface
         $this->userCatalogueRepository = $userCatalogueRepository;
     }
 
-    public function paginate()
+    public function paginate($request)
     {
-        dd(1);
+        $get = $request->input();
+        $perpage = ($get['perpage']) ?? 20;
+
+        $userCatalogue = $this->userCatalogueRepository->pagination(['perpage' => $perpage]);
+        return $userCatalogue;
     }
 
     public function create($request)

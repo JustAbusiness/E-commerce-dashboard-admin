@@ -22,6 +22,13 @@ class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
 
+    public function pagination(array $param = [])
+    {
+     return $this->model->RelationCount(['users'])
+
+     ->paginate($param['perpage']);
+    }
+
     public function create(array $payload = [])
     {
         $model = $this->model->create($payload);

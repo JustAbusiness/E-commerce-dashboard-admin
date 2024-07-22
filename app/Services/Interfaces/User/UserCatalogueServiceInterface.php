@@ -10,4 +10,5 @@ namespace App\Services\Interfaces\User;
  interface UserCatalogueServiceInterface
  {
      public function create($request);
+     public function paginate($request);
  }

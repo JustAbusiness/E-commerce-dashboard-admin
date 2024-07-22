@@ -16,9 +16,4 @@ class UserCatalogueRepository extends BaseRepository implements UserCatalogueRep
     {
         $this->model = $model;
     }
-
-    // public function create(array $payload): UserCatalogue
-    // {
-    //     return UserCatalogue::create($payload);
-    // }
 }
