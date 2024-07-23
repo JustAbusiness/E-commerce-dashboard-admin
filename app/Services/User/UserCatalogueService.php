@@ -2,12 +2,13 @@
 
 namespace App\Services\User;
 
+use App\Services\BaseService;
 use App\Services\Interfaces\User\UserCatalogueServiceInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\Interfaces\User\UserCatalogueRepositoryInterface as UserCatalogueRepository;
 
-class UserCatalogueService implements UserCatalogueServiceInterface
+class UserCatalogueService extends BaseService implements UserCatalogueServiceInterface
 {
     protected $userCatalogueRepository;
     protected $payload = ['name', 'description'];

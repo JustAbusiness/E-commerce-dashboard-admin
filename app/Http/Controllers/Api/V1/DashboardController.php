@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('auth:api');
+    public function __construct
+    (
+
+    ) {
+
     }
     /**
      * Display a listing of the resource.
@@ -19,54 +21,27 @@ class DashboardController extends Controller
     {
         $sidebar = trans('sidebar');
         return response()->json(
-            $sidebar,  ResponseEnum::OK);
+            $sidebar,
+            ResponseEnum::OK
+        );
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  Update status
      */
-    public function create()
+    public function updateStatus(Request $request)
     {
-        //
+        $model = $request->input('model');
+        $subFolder = str_replace('Catalogue', '', $model);
+        $folder = 'Services' . '\\' . $subFolder;
+        $interface = 'Service';
+        $class = loadClass($model, $folder, $interface);
+        if($class->updateStatus($request, $subFolder)){ {
+            return response()->json([
+                'message' => 'Status updated successfully'
+            ], ResponseEnum::OK);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+}
 }

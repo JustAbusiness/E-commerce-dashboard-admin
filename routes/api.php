@@ -19,6 +19,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/catalogue', [UserCatalogueController::class, 'index'])->name('userCatalogue.index');
     Route::post('/user/catalogue/store', [UserCatalogueController::class, 'store'])->name('userCatalogue.store');
 
+    // GENERA;
+    Route::put('/update/status', [DashboardController::class, 'updateStatus'])->name('dashboard.update.status');
+
 });
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');

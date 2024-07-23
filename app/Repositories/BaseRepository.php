@@ -37,4 +37,22 @@ class BaseRepository implements BaseRepositoryInterface
         return $model;
     }
 
+    public function update(array $payload = [], int $id = 0)
+    {
+        $model= $this->findById($id);
+        $model->fill($payload);  // Điền dữ liệu mới vào mô hình từ mảng $payload
+        $model->save();
+        return $model;
+    }
+
+    public function findById
+    (
+        int $modelId,
+        array $column = ['*'],
+        array $relation = [],
+    )
+    {
+        return $this->model->select($column)->with($relation)->findOrFail($modelId);
+
+    }
 }
