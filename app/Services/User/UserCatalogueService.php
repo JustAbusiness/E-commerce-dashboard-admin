@@ -11,6 +11,8 @@ class UserCatalogueService implements UserCatalogueServiceInterface
 {
     protected $userCatalogueRepository;
     protected $payload = ['name', 'description'];
+    protected $fieldSearch = ['name'];
+
     public function __construct
     (
         UserCatalogueRepository $userCatalogueRepository
@@ -21,10 +23,13 @@ class UserCatalogueService implements UserCatalogueServiceInterface
 
     public function paginate($request)
     {
-        $get = $request->input();
-        $perpage = ($get['perpage']) ?? 20;
+        $perpage = ($request->input('perpage')) ? $request->input('perpage') : 20;
+        $condition = [
+            'keyword' => $request->input('keyword'),
+            'publish' => $request->input('publish'),
+        ];
 
-        $userCatalogue = $this->userCatalogueRepository->pagination(['perpage' => $perpage]);
+        $userCatalogue = $this->userCatalogueRepository->pagination($perpage, $condition, $this->fieldSearch);
         return $userCatalogue;
     }
 

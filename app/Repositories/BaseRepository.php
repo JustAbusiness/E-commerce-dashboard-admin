@@ -22,11 +22,13 @@ class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
 
-    public function pagination(array $param = [])
+    public function pagination(int $perpage = 20, array $condition = [], array $fieldSearch = [])
     {
-     return $this->model->RelationCount(['users'])
-
-     ->paginate($param['perpage']);
+        return $this->model
+            ->keyword(($condition['keyword']) ?? null)    // => from Query Scope
+            ->publish(($condition['publish']) ?? null)    // => from Query Scope
+            ->RelationCount(['users'])
+            ->paginate($perpage);
     }
 
     public function create(array $payload = [])

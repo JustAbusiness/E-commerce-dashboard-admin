@@ -10,5 +10,5 @@ namespace App\Repositories\Interfaces\User;
  interface UserCatalogueRepositoryInterface
  {
     public function create(array $payload = []);
-    public function pagination(array $param = []);
+    public function pagination(int $perpage = 20, array $condition = [], array $fieldSearch = []);
  }
