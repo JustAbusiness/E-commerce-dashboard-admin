@@ -11,4 +11,5 @@ namespace App\Repositories\Interfaces\User;
  {
     public function create(array $payload = []);
     public function pagination(int $perpage = 20, array $condition = [], array $fieldSearch = []);
+    public function forceDeleteAll(array $ids = []);
  }

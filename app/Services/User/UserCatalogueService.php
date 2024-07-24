@@ -49,4 +49,19 @@ class UserCatalogueService extends BaseService implements UserCatalogueServiceIn
         }
     }
 
+    public function deleteAll($request)
+    {
+        DB::beginTransaction();
+        try {
+            $ids = explode(',', $request->input('ids'));
+            $this->userCatalogueRepository->forceDeleteAll($ids);
+            DB::commit();
+            return true;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error($th->getMessage());
+            return false;
+        }
+    }
+
 }

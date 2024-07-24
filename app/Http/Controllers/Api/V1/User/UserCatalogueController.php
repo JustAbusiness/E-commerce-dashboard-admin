@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\UserCatalogue\UserCatalogueStoreRequest;
 use Illuminate\Http\Request;
 use App\Services\Interfaces\User\UserCatalogueServiceInterface as UserCatalogueService;
-use App\Http\Resources\UserCatalogueResource;
+
 
 class UserCatalogueController extends Controller
 {
@@ -37,6 +37,20 @@ class UserCatalogueController extends Controller
 
         return response()->json([
             'message' => 'User Catalogue creation failed'
+        ], 422);
+    }
+
+    public function deleteAll(Request $request)
+    {
+        if ($this->userCatalogueService->deleteAll($request))
+        {
+            return response()->json([
+                'message' => 'User Catalogue deleted successfully'
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'User Catalogue deletion failed'
         ], 422);
     }
 }

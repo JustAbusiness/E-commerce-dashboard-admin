@@ -32,4 +32,22 @@ class BaseService
             return false;
         }
     }
+
+    public function updateStatusAll($request, $subFolder)
+    {
+        DB::beginTransaction();
+        try {
+            $payload[$request->input('field')] = $request->input('value');
+            $folder = 'Repositories' . '\\' . $subFolder;
+            $interface = 'Repository';
+            $class = loadClass($request->input('model'), $folder, $interface);
+            $class->updateByIds($request->input('ids'), $payload);
+
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
 }

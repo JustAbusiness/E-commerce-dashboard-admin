@@ -45,6 +45,16 @@ class BaseRepository implements BaseRepositoryInterface
         return $model;
     }
 
+    public function forceDeleteAll(array $ids = [])
+    {
+        return $this->model->whereIn('id', $ids)->forceDelete();
+    }
+
+    public function updateByIds(array $ids = [], $payload = [])
+    {
+        return $this->model->whereIn('id', $ids)->update($payload);
+    }
+
     public function findById
     (
         int $modelId,
