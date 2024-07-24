@@ -17,8 +17,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // User Catalogue
     Route::get('/user/catalogue', [UserCatalogueController::class, 'index'])->name('userCatalogue.index');
+    Route::get('/user/catalogue/{id}', [UserCatalogueController::class, 'read'])->name('userCatalogue.read')->where(['id' => '[0-9]+']);
     Route::post('/user/catalogue/store', [UserCatalogueController::class, 'store'])->name('userCatalogue.store');
     Route::delete('/user/catalogue/deleteAll', [UserCatalogueController::class, 'deleteAll'])->name('userCatalogue.deleteAll');
+    Route::delete('/user/catalogue/delete/{id}', [UserCatalogueController::class, 'delete'])->name('userCatalogue.destroy')->where(['id' => '[0-9]+']);
+
     // GENERA;
     Route::put('/update/status', [DashboardController::class, 'updateStatus'])->name('dashboard.update.status');
     Route::put('/update/status/all', [DashboardController::class, 'updateStatusAll'])->name('dashboard.update.statusAll');
