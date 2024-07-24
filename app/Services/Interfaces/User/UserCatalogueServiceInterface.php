@@ -13,4 +13,5 @@ namespace App\Services\Interfaces\User;
      public function paginate($request);
      public function deleteAll($request);
      public function destroy($id);
+     public function update($request, $id);
  }

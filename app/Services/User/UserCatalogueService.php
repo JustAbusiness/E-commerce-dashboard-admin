@@ -64,6 +64,21 @@ class UserCatalogueService extends BaseService implements UserCatalogueServiceIn
         }
     }
 
+    public function update($request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $payload = $request->only('name', 'description');
+            $this->userCatalogueRepository->update($payload, $id);
+
+            DB::commit();
+            return true;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error($th->getMessage());
+            return false;
+        }
+    }
 
     public function destroy($id)
     {

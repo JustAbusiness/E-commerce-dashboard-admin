@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\UserCatalogue\UserCatalogueStoreRequest;
 use App\Http\Resources\UserCatalogueResource;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\Interfaces\User\UserCatalogueServiceInterface as UserCatalogueService;
 use App\Repositories\Interfaces\User\UserCatalogueRepositoryInterface as UserCatalogueRepository;
@@ -59,6 +58,19 @@ class UserCatalogueController extends Controller
         return response()->json([
             'message' => 'User Catalogue creation failed'
         ], 422);
+    }
+
+    public function update(Request $request, $id)
+    {
+        if ($this->userCatalogueService->update($request, $id)) {
+            return response()->json([
+                'message' => 'User Catalogue updated successfully'
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'User Catalogue cannot update'
+        ], 500);
     }
 
     public function deleteAll(Request $request)
