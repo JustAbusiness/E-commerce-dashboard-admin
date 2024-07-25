@@ -15,4 +15,5 @@ namespace App\Repositories\Interfaces\User;
     public function findById(int $modelId);
     public function deleteId(int $id);
     public function update(array $payload = [], int $id = 0);
+    public function all();
  }

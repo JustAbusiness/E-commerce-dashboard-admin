@@ -32,6 +32,15 @@ class UserCatalogueController extends Controller
         ], 200);
     }
 
+    public function all()
+    {
+        return response()->json([
+            'message' => 'User Catalogue fetched successfully',
+            'data' => $this->userCatalogueRepository->all()
+        ], 200);
+    }
+
+
     public function read(Request $request, $id)
     {
 

@@ -22,6 +22,11 @@ class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
 
+    public function all()
+    {
+        return $this->model->all();
+    }
+
     public function pagination(int $perpage = 20, array $condition = [], array $fieldSearch = [])
     {
         return $this->model

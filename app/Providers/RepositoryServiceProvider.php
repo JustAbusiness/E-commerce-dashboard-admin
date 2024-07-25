@@ -9,6 +9,9 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     public $bindings = [
         'App\Repositories\Interfaces\User\UserCatalogueRepositoryInterface' => 'App\Repositories\User\UserCatalogueRepository',
+        'App\Repositories\Interfaces\User\UserRepositoryInterface' => 'App\Repositories\User\UserRepository',
+        'App\Repositories\Interfaces\ProvinceRepositoryInterface' => 'App\Repositories\ProvinceRepository',
+        'App\Repositories\Interfaces\DistrictRepositoryInterface' => 'App\Repositories\DistrictRepository',
     ];
 
     /**
@@ -19,7 +22,7 @@ class RepositoryServiceProvider extends ServiceProvider
         foreach($this->bindings as $key => $val) {
             $this->app->bind($key,$val);
         }
- 
+
         // $this->app->register(RepositoryServiceProvider::class);
     }
 
