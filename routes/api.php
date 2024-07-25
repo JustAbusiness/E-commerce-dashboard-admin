@@ -3,14 +3,10 @@
 use App\Http\Controllers\Api\V1\LocationController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\DashboardController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\User\UserCatalogueController;
+use App\Http\Controllers\Api\V1\User\UserController;
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard/getModule', [DashboardController::class, 'getModule'])->name('dashboard.getModule');
@@ -24,6 +20,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/user/catalogue/update/{id}', [UserCatalogueController::class, 'update'])->name('userCatalogue.update')->where(['id' => '[0-9]+']);
     Route::delete('/user/catalogue/deleteAll', [UserCatalogueController::class, 'deleteAll'])->name('userCatalogue.deleteAll');
     Route::delete('/user/catalogue/delete/{id}', [UserCatalogueController::class, 'delete'])->name('userCatalogue.destroy')->where(['id' => '[0-9]+']);
+
+    // USER
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/all', [UserController::class, 'all'])->name('user.all');
+    Route::get('/user/{id}', [UserController::class, 'read'])->name('user.read')->where(['id' => '[0-9]+']);
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+    Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update')->where(['id' => '[0-9]+']);
+    Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.destroy')->where(['id' => '[0-9]+']);
 
     // LOCATION
     Route::get('/provinces', [LocationController::class, 'provinces'])->name('provinces.index');
