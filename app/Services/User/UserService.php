@@ -12,9 +12,8 @@ use App\Classes\Upload;
 class UserService extends BaseService implements UserServiceInterface
 {
     protected $userRepository;
-    protected $payload = ['name', 'description', 'districtId', 'email', 'image', 'password', 'provinceId', 'userCatalogueId'];
+    protected $payload = ['name', 'description', 'districtId', 'email', 'image', 'password', 'provinceId', 'userCatalogueId', 'birthday', 'address'];
     protected $fieldSearch = ['name'];
-
     protected $upload;
 
     public function __construct
@@ -35,16 +34,43 @@ class UserService extends BaseService implements UserServiceInterface
             'publish' => $request->input('publish'),
         ];
 
-        $user = $this->userRepository->pagination($perpage, $condition, $this->fieldSearch);
+        $relation = [];
+        $search = $this->fieldSearch;
+        // Extends pagination
+        $extend = [
+            'orderBy' => ['id', 'desc']
+        ];
+
+        $user = $this->userRepository->pagination(
+            $perpage,
+            $condition,
+            $search,
+            $relation,
+            $extend['orderBy']
+        );
         return $user;
+    }
+
+    protected function request($request)
+    {
+        $payload = castRequest($request->only($this->payload), [
+            'districtId' ,
+            'provinceId',
+            'userCatalogueId',
+            'wardId'
+        ]);
+
+        return $payload;
     }
 
     public function create($request)
     {
         DB::beginTransaction();
         try {
-            $payload = $request->only($this->payload);
+            $payload = $this->request($request);
             $payload['image'] = $this->upload->save($request);
+            $payload['passwoord'] = bcrypt($payload['password']);
+            $payload['birthday'] = convertDateFormat($request->input('birthday'));
 
             $this->userRepository->create($payload);
             DB::commit();

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\User\User\UserUpdateRequest;
-use App\Http\Resources\UserCatalogueResource;
 use App\Http\Requests\V1\User\UserStoreRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\Services\Interfaces\User\UserServiceInterface as UserService;
 use App\Repositories\Interfaces\User\UserRepositoryInterface as UserRepository;
@@ -29,7 +29,7 @@ class UserController extends Controller
         $users = $this->userService->paginate($request);
         return response()->json([
             'message' => 'User fetched successfully',
-            'data' => new UserCatalogueResource($users)
+            'data' => $users
         ], 200);
     }
 
@@ -42,28 +42,19 @@ class UserController extends Controller
     }
 
 
-    // public function read(Request $request, $id)
-    // {
+    public function read($id)
+    {
 
-    //     $userCatalogue = $this->userCatalogueRepository->findById($id);
-    //     if ($userCatalogue) {
-    //         return response()->json([
-    //             'message' => 'User Catalogue fetched successfully',
-    //             'data' => new UserCatalogueResource($userCatalogue)
-    //         ], 200);
-    //     }
-
-    //     return response()->json([
-    //         'message' => 'User Catalogue not found',
-    //     ], 404);
-    // }
+       $user = $this->userRepository->findById($id);
+       return new UserResource($user);
+    }
 
     public function store(UserStoreRequest $request)
     {
         if ($this->userService->create($request)) {
             return response()->json([
                 'message' => 'User created successfully'
-            ], 201);
+            ], 200);
         }
 
         return response()->json([

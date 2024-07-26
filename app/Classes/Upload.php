@@ -17,7 +17,7 @@ class Upload
          Storage::makeDirectory($directory);
          $imagePath = Storage::putFile($directory, $image);
 
-         return $imagePath;
+         return str_replace("public", "storage", $imagePath);
     }
 }
 

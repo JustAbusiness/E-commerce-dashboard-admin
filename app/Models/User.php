@@ -18,8 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'description',
+        'district_id',
+        'image',
+        'phone',
+        'province_id',
+        'ward_id',
         'name',
         'email',
+        'user_catalogue_id',
+        'publish',
         'password',
     ];
 
@@ -33,6 +41,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+    // Cast default value for publish
+    protected $attributes = [
+        'publish' => 1,
+    ];
     /**
      * Get the attributes that should be cast.
      *

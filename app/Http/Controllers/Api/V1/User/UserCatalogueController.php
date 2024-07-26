@@ -28,7 +28,7 @@ class UserCatalogueController extends Controller
         $userCatalogues = $this->userCatalogueService->paginate($request);
         return response()->json([
             'message' => 'User Catalogue fetched successfully',
-            'data' => new UserCatalogueResource($userCatalogues)
+            'data' => $userCatalogues
         ], 200);
     }
 

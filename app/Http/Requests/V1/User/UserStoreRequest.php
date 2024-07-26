@@ -22,16 +22,33 @@ class UserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => 'required',
-            // 'description' => 'required',
+          'email' => 'required|email',
+          'name' => 'required',
+          'password' => 'required|string|min:6',
+          'repassword' => 'required|same:password',
+          'userCatalogueId' => 'gt:0',
+          'phone' => 'required',
+          'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ];
     }
 
     public function messages(): array
     {
         return [
-            // 'name.required' => 'Name is required',
-            // 'description.required' => 'Description is required',
+           'email.required' => 'Email is required',
+            'email.email' => 'Email is not valid',
+            'name.required' => 'Name is required',
+            'password.required' => 'Password is required',
+            'password.min' => 'Password must be at least 6 characters',
+            'repassword.required' => 'Repassword is required',
+            'repassword.same' => 'Repassword must be the same as password',
+            'userCatalogueId.gt' => 'User Catalogue is required',
+            'phone.required' => 'Phone is required',
+            'image.required' => 'Image is required',
+            'image.file' => 'Image must be a file',
+            'image.mimes' => 'Image must be a file of type: jpeg, png, jpg, gif, svg',
+            'image.max' => 'Image must be a file of size: 2048',
         ];
     }
 }

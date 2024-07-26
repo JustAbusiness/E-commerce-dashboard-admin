@@ -10,7 +10,7 @@ class AppServiceProvider extends ServiceProvider
 
     public $bindings = [
         'App\Services\Interfaces\User\UserCatalogueServiceInterface' => 'App\Services\User\UserCatalogueService',
-
+        'App\Services\Interfaces\User\UserServiceInterface' => 'App\Services\User\UserService',
     ];
     /**
      * Register any application services.

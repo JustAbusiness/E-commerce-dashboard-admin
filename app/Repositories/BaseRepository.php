@@ -27,12 +27,13 @@ class BaseRepository implements BaseRepositoryInterface
         return $this->model->all();
     }
 
-    public function pagination(int $perpage = 20, array $condition = [], array $fieldSearch = [])
+    public function pagination(int $perpage = 20, array $condition = [], array $fieldSearch = [], array $relation = [], array $extend = [])
     {
         return $this->model
             ->keyword(($condition['keyword']) ?? null)    // => from Query Scope
             ->publish(($condition['publish']) ?? null)    // => from Query Scope
-            ->RelationCount(['users'])
+            // ->orderBy($extend['orderBy'] ?? ['id', 'desc'])    // => from Query Scope
+            ->relationCount(['users'])
             ->paginate($perpage);
     }
 
