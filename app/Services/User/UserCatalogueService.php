@@ -29,8 +29,12 @@ class UserCatalogueService extends BaseService implements UserCatalogueServiceIn
             'keyword' => $request->input('keyword'),
             'publish' => $request->input('publish'),
         ];
+        $relation = ['users'];
+        $extend = [
+            'orderBy' => ['id', 'desc']
+        ];
 
-        $userCatalogue = $this->userCatalogueRepository->pagination($perpage, $condition, $this->fieldSearch);
+        $userCatalogue = $this->userCatalogueRepository->pagination($perpage, $condition, $this->fieldSearch, $relation, $extend);
         return $userCatalogue;
     }
 

@@ -38,3 +38,15 @@ if(!function_exists('castRequest'))
         return $payload;
     }
 }
+
+
+// Unset Payload
+if(!function_exists('unsetPayload'))
+{
+    function unsetPayload($payload, $keyArray){
+        foreach ($keyArray as $k => $v) {
+            unset($payload[$v]);
+        }
+        return $payload;
+    }
+}

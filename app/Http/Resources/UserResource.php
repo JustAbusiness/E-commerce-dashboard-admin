@@ -20,11 +20,15 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'address' => $this->address,
-            'birthday' => $this->birthday,
-            'image' => $this->image,
+            'birthday' => convertDateFormat($this->birthday, 'Y-m-d H:i:s', 'Y-m-d'),
+            'image' => config('app.url').'/'.$this->image,
             'publish' => $this->publish,
             'users_count' => $this->users_count,
             'description' => $this->description,
+            'userCatalogueId' => $this->user_catalogue_id,
+            'provinceId' => $this->province_id,
+            'districtId' => $this->district_id,
+            'wardId' => $this->ward_id,
         ];
     }
 }

@@ -22,7 +22,7 @@ class UserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-          'email' => 'required|email',
+          'email' => 'required|email|unique:users.email,'.$this->id,
           'name' => 'required',
           'password' => 'required|string|min:6',
           'repassword' => 'required|same:password',
@@ -36,7 +36,7 @@ class UserStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-           'email.required' => 'Email is required',
+            'email.required' => 'Email is required',
             'email.email' => 'Email is not valid',
             'name.required' => 'Name is required',
             'password.required' => 'Password is required',

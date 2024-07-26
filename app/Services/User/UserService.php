@@ -101,7 +101,16 @@ class UserService extends BaseService implements UserServiceInterface
     {
         DB::beginTransaction();
         try {
-            $payload = $request->only('name', 'description');
+            $payload = $request->except(['_token', 'send']);
+            if ($payload['birthday'] != null) {
+                $payload['birthday'] = convertDateFormat($payload['birthday'], 'Y-m-d');
+            }
+            if ($request->hasFile('image')) {
+                $payload['image'] = $this->upload->save($request);
+            } else {
+                unsetPayload($payload['image'], 'image');
+            }
+
             $this->userRepository->update($payload, $id);
 
             DB::commit();
@@ -126,5 +135,4 @@ class UserService extends BaseService implements UserServiceInterface
             return false;
         }
     }
-
 }
