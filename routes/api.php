@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\Finder\HandlerCommand\CreateFolderController;
 use App\Http\Controllers\Api\V1\LocationController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\User\UserCatalogueController;
 use App\Http\Controllers\Api\V1\User\UserController;
+
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -32,6 +34,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // LOCATION
     Route::get('/provinces', [LocationController::class, 'provinces'])->name('provinces.index');
     Route::get('/location', [LocationController::class, 'location'])->name('location.index');
+
+
+    // FFINDER
+    Route::post('/finder/create-root', [CreateFolderController::class, 'buildRootFolder'])->name('finder.create-root');
+
 
     // GENERAL;
     Route::put('/update/status', [DashboardController::class, 'updateStatus'])->name('dashboard.update.status');
