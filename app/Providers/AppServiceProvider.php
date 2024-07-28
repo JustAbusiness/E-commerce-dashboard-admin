@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Testing\File;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
+use Illuminate\Filesystem\Filesystem;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,21 @@ class AppServiceProvider extends ServiceProvider
             $this->app->bind($key,$val);
         }
 
+        $this->app->register(\App\Providers\RepositoryServiceProvider::class);
+
+        $this->app->singleton('League\Glide\Server', function ($app) {
+            $filesystem = $app->make(Filesystem::class);
+            $sourcePath = storage_path('uploads');
+            $cachePath = storage_path('app/public/cache');
+
+            // return ServerFactory::create([
+            //     'source' => $filesystem->getDriver(),
+            //     'cache' => $filesystem->getDriver(),
+            //     'source_path_prefix' => $sourcePath,
+            //     'cache_path_prefix' => $cachePath,
+            //     'base_url' => 'img',
+            // ]);
+        });
     }
 
     /**

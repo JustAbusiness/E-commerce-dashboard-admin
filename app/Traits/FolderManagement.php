@@ -34,5 +34,17 @@ trait FolderManagement
 
         return $folder;
     }
+
+    public function getFiles($directory = '')
+    {
+        $basePath = storage_path($this->basePath. DIRECTORY_SEPARATOR . $directory);
+        $files = [];
+
+        if (File::isDirectory($basePath)) {
+            $files = File::files($basePath);
+        }
+
+        return $files;
+    }
 }
 
