@@ -12,11 +12,12 @@ trait FolderManagement
     {
     }
 
-    public function getFolderList($directory = '')
+    public function getFolderList($directory = '', $level = 1)
     {
         $basePath = storage_path($this->basePath. DIRECTORY_SEPARATOR . $directory);
         $folder = [];
 
+        $level = ($level > 5) ? 5 : $level;
         if (File::isDirectory($basePath)) {
             $directories = File::directories($basePath);
             foreach($directories as $subDirectories) {
@@ -34,3 +35,4 @@ trait FolderManagement
         return $folder;
     }
 }
+

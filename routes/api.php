@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Finder\HandlerCommand\CreateFolderController;
+use App\Http\Controllers\Api\Finder\HandlerCommand\RenameFolderController;
 use App\Http\Controllers\Api\V1\LocationController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\DashboardController;
@@ -38,7 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // FFINDER
     Route::post('/finder/create-root', [CreateFolderController::class, 'buildRootFolder'])->name('finder.create-root');
-
+    Route::post('/finder/create/folder', [CreateFolderController::class, 'create'])->name('finder.create');
+    Route::post('/finder/rename/folder', [RenameFolderController::class, 'rename'])->name('finder.rename');
 
     // GENERAL;
     Route::put('/update/status', [DashboardController::class, 'updateStatus'])->name('dashboard.update.status');
