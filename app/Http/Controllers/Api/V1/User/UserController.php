@@ -54,8 +54,8 @@ class UserController extends Controller
     public function read($id)
     {
 
-       $user = $this->userRepository->findById($id);
-       return new UserResource($user);
+        $user = $this->userRepository->findById($id);
+        return new UserResource($user);
     }
 
     public function store(UserStoreRequest $request)
@@ -73,11 +73,13 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, $id)
     {
-        if ($this->userService->update($request, $id)) {
+        $user = $this->userService->update($request, $id);
+        if ($user) {
             return response()->json([
                 'message' => 'User Catalogue updated successfully'
             ], 200);
         }
+
 
         return response()->json([
             'message' => 'User Catalogue cannot update'

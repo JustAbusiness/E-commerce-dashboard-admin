@@ -29,6 +29,7 @@ class UserResource extends JsonResource
             'provinceId' => $this->province_id,
             'districtId' => $this->district_id,
             'wardId' => $this->ward_id,
+            'userCatalogueName' => $this->user_catalogues->name
         ];
     }
 }
