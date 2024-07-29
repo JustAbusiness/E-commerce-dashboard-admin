@@ -17,9 +17,9 @@ class ProductCatalogue extends Model
         'name',
         'code',
         'description',
-    ];
+    ];  
 
     protected $attributes = [
         'publish' => 1,
-    ]; 
+    ];
 }

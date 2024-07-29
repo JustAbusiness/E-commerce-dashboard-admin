@@ -42,7 +42,6 @@ class ProductCatalogueController extends Controller
         ], 200);
     }
 
-
     public function read(Request $request, $id)
     {
 
