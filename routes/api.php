@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Finder\HandlerCommand\ListController;
 use App\Http\Controllers\Api\V1\LocationController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\DashboardController;
+use App\Http\Controllers\Api\V1\Product\ProductCatalogueController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\User\UserCatalogueController;
 use App\Http\Controllers\Api\V1\User\UserController;
@@ -34,6 +35,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
     Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update')->where(['id' => '[0-9]+']);
     Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.destroy')->where(['id' => '[0-9]+']);
+
+    // PRODUCT CATALOGUE
+    Route::get('/product/catalogue', [ProductCatalogueController::class, 'index'])->name('productCatalogue.index');
+    Route::get('/product/catalogue/all', [ProductCatalogueController::class, 'all'])->name('productCatalogue.all');
+    Route::get('/product/catalogue/{id}', [ProductCatalogueController::class, 'read'])->name('productCatalogue.read')->where(['id' => '[0-9]+']);
+    Route::post('/product/catalogue/store', [ProductCatalogueController::class, 'store'])->name('productCatalogue.store');
+    Route::put('/product/catalogue/update/{id}', [ProductCatalogueController::class, 'update'])->name('productCatalogue.update')->where(['id' => '[0-9]+']);
+    Route::delete('/product/catalogue/deleteAll', [ProductCatalogueController::class, 'deleteAll'])->name('productCatalogue.deleteAll');
+    Route::delete('/product/catalogue/delete/{id}', [ProductCatalogueController::class, 'delete'])->name('productCatalogue.destroy')->where(['id' => '[0-9]+']);
+
+
 
     // LOCATION
     Route::get('/provinces', [LocationController::class, 'provinces'])->name('provinces.index');

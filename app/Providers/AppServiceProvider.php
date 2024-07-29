@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public $bindings = [
         'App\Services\Interfaces\User\UserCatalogueServiceInterface' => 'App\Services\User\UserCatalogueService',
         'App\Services\Interfaces\User\UserServiceInterface' => 'App\Services\User\UserService',
+        'App\Services\Interfaces\Product\ProductCatalogueServiceInterface' => 'App\Services\Product\ProductCatalogueService',
     ];
     /**
      * Register any application services.

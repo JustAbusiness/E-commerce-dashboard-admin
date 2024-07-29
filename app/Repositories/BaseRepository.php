@@ -33,7 +33,8 @@ class BaseRepository implements BaseRepositoryInterface
             ->keyword(($condition['keyword']) ?? null)    // => from Query Scope
             ->publish(($condition['publish']) ?? null)    // => from Query Scope
             // ->orderBy($extend['orderBy'] ?? ['id', 'desc'])    // => from Query Scope
-            ->relationCount(['users'])
+            // ->relationCount(['users'])
+            // ->relationcount([''])
             ->paginate($perpage);
     }
 
