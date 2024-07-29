@@ -33,10 +33,10 @@ class Upload
     {
         $path = $request->input('path');
         $savePath = public_path('uploads/' . $path);
-        $thumbPath = public_path('uploads/thumbs');
-        if (!File::exists($thumbPath)) {
-            File::makeDirectory($thumbPath, 0777, true, true);
-        }
+        // $thumbPath = public_path('uploads/thumbs');
+        // if (!File::exists($thumbPath)) {
+        //     File::makeDirectory($thumbPath, 0777, true, true);
+        // }
 
         $temp = [];
         if ($request->hasFile('files')) {

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Carbon;
 
 
 trait FolderManagement
@@ -35,16 +36,31 @@ trait FolderManagement
         return $folder;
     }
 
-    public function getFiles($directory = '')
+    public function getFiles($folderPath = '', $request)
     {
-        $basePath = storage_path($this->basePath. DIRECTORY_SEPARATOR . $directory);
-        $files = [];
+        $files = File::files($folderPath);
+        $images = [];
+        if (count($files)) {
+            $allowedExtension = config('upload.allowed_extension');
+            foreach ($files as $file) {
+                $filename = $file->getFilename();
+                $fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
+                if (in_array($fileExtension, $allowedExtension)) {
+                    $filePath = 'uploads/' . $request->input('path') . '/' . str_replace('.' . $fileExtension, '', $filename);
+                    $modified = Carbon::createFromTimestamp(filemtime($file->getPathname()))->format('Y-m-d H:i:s');
 
-        if (File::isDirectory($basePath)) {
-            $files = File::files($basePath);
+                    $images[] = [
+                        'name' => $filename,
+                        'src' => asset($filePath),
+                        'path' => asset($filePath),
+                        'size' => File::size($file),
+                        'modified' => $modified,
+                        'ext' => $fileExtension
+                    ];
+                }
+            }
         }
-
-        return $files;
+        return $images;
     }
 }
 

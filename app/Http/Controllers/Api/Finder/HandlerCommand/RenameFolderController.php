@@ -12,10 +12,10 @@ class RenameFolderController extends Controller
 {
     use FolderManagement;
     private $command = 'CreateFolder';
-    private $baseDir = 'uploads';
+    private $baseDir;
     public function __construct()
     {
-        $this->baseDir = 'public/' . $this->baseDir;
+        $this->baseDir = public_path(config('upload.baseDir'));
     }
 
     public function rename(Request $request)
