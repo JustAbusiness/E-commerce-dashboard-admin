@@ -68,9 +68,9 @@ class UserService extends BaseService implements UserServiceInterface
         DB::beginTransaction();
         try {
             $payload = $this->request($request);
-            $payload['image'] = $this->upload->save($request);
-            $payload['passwoord'] = bcrypt($payload['password']);
-            $payload['birthday'] = convertDateFormat($request->input('birthday'));
+            // $payload['image'] = $this->upload->save($request);
+            $payload['password'] = bcrypt($payload['password']);
+            $payload['birthday'] = convertDateFormat($request->input('birthday'), 'Y-m-d');
 
             $this->userRepository->create($payload);
             DB::commit();

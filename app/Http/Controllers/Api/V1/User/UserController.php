@@ -33,6 +33,15 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function info(Request $request)
+    {
+        $user = $request->user();
+        return response()->json([
+            'message' => 'User fetched successfully',
+            'data' => $user
+        ], 200);
+    }
+
     public function all()
     {
         return response()->json([

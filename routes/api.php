@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/user/catalogue/delete/{id}', [UserCatalogueController::class, 'delete'])->name('userCatalogue.destroy')->where(['id' => '[0-9]+']);
 
     // USER
+    Route::get('/user/info', [UserController::class, 'info'])->name('user.info');
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/all', [UserController::class, 'all'])->name('user.all');
     Route::get('/user/{id}', [UserController::class, 'read'])->name('user.read')->where(['id' => '[0-9]+']);
