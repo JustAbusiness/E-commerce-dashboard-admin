@@ -23,7 +23,10 @@ class Product extends Model
         'description',
         'publish',
         'images',
-        'allow_to_sell'
+        'allow_to_sell',
+        'input_tax_id',
+        'output_tax_id',
+        'tax_status'
     ];
 
     protected $attributes = [
@@ -37,5 +40,11 @@ class Product extends Model
     public function product_catalogues()
     {
         return $this->belongsTo(ProductCatalogue::class, 'product_catalogue_id', 'id');
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsToMany(Warehouse::class, 'product_warehouse', 'product_id', 'warehouse_id')
+        ->withPivot('quantity', 'cost')->withTimestamps();
     }
 }
