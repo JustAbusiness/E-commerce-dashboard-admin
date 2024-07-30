@@ -22,10 +22,16 @@ class Product extends Model
         'mass',
         'description',
         'publish',
+        'images',
+        'allow_to_sell'
     ];
 
     protected $attributes = [
         'publish' => 1,
+    ];
+
+    protected $casts = [
+        'images' => 'json',
     ];
 
     public function product_catalogues()

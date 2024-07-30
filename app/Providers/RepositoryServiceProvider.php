@@ -14,6 +14,7 @@ class RepositoryServiceProvider extends ServiceProvider
         'App\Repositories\Interfaces\DistrictRepositoryInterface' => 'App\Repositories\DistrictRepository',
         'App\Repositories\Interfaces\Product\ProductCatalogueRepositoryInterface' => 'App\Repositories\Product\ProductCatalogueRepository',
         'App\Repositories\Interfaces\Attribute\AttributeCatalogueRepositoryInterface' => 'App\Repositories\Attribute\AttributeCatalogueRepository',
+        'App\Repositories\Interfaces\Tax\TaxRepositoryInterface' => 'App\Repositories\Tax\TaxRepository',
     ];
 
     /**

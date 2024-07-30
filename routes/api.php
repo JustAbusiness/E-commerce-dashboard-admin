@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\User\UserCatalogueController;
 use App\Http\Controllers\Api\V1\User\UserController;
 use App\Http\Controllers\Api\V1\Attribute\AttributeCatalogueController;
 use App\Http\Controllers\Api\V1\Attribute\AttributeController;
+use App\Http\Controllers\Api\V1\Tax\TaxController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard/getModule', [DashboardController::class, 'getModule'])->name('dashboard.getModule');
@@ -62,6 +63,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/attribute/store', [AttributeController::class, 'store'])->name('attribute.store');
     Route::put('/attribute/update/{id}', [AttributeController::class, 'update'])->name('attribute.update')->where(['id' => '[0-9]+']);
     Route::delete('/attribute/delete/{id}', [AttributeController::class, 'delete'])->name('attribute.destroy')->where(['id' => '[0-9]+']);
+
+    // TAX
+    Route::post('/tax/store', [TaxController::class, 'store'])->name('tax.store');
+    Route::get('/tax', [TaxController::class, 'index'])->name('tax.index');
+    Route::get('/tax/all', [TaxController::class, 'all'])->name('tax.all');
+    Route::get('/tax/{id}', [TaxController::class, 'read'])->name('tax.read')->where(['id' => '[0-9]+']);
+    Route::put('/tax/update/{id}', [TaxController::class, 'update'])->name('tax.update')->where(['id' => '[0-9]+']);
+    Route::delete('/tax/delete/{id}', [TaxController::class, 'delete'])->name('tax.destroy')->where(['id' => '[0-9]+']);
+
+
 
     // LOCATION
     Route::get('/provinces', [LocationController::class, 'provinces'])->name('provinces.index');

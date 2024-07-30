@@ -42,7 +42,7 @@ class AttributeCatalogueController extends Controller
         ], 200);
     }
 
-    public function read(Request $request, $id)
+    public function read($id)
     {
 
         $attribute = $this->attributeRepository->findById($id);

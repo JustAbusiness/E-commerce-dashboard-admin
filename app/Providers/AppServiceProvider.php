@@ -20,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Services\Interfaces\Attribute\AttributeCatalogueServiceInterface' => 'App\Services\Attribute\AttributeCatalogueService',
 
+        'App\Services\Interfaces\Tax\TaxServiceInterface' => 'App\Services\Tax\TaxService',
+
     ];
     /**
      * Register any application services.
