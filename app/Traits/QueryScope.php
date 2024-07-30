@@ -30,6 +30,7 @@ trait QueryScope
         if (!empty($relation)) {
             foreach ($relation as $key => $value) {
                 $query->withCount($value);
+                $query->with($value);
             }
         }
         return $query;

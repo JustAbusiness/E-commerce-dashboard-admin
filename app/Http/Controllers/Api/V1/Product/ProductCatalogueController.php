@@ -74,12 +74,12 @@ class ProductCatalogueController extends Controller
     {
         if ($this->productCatalogueService->update($request, $id)) {
             return response()->json([
-                'message' => 'product Catalogue updated successfully'
+                'message' => 'Product Catalogue updated successfully'
             ], 200);
         }
 
         return response()->json([
-            'message' => 'product Catalogue cannot update'
+            'message' => 'Product Catalogue cannot update'
         ], 500);
     }
 
