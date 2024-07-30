@@ -11,8 +11,8 @@ use App\Http\Controllers\Api\V1\Product\ProductCatalogueController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\User\UserCatalogueController;
 use App\Http\Controllers\Api\V1\User\UserController;
-
-
+use App\Http\Controllers\Api\V1\Attribute\AttributeCatalogueController;
+use App\Http\Controllers\Api\V1\Attribute\AttributeController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard/getModule', [DashboardController::class, 'getModule'])->name('dashboard.getModule');
@@ -45,7 +45,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/product/catalogue/deleteAll', [ProductCatalogueController::class, 'deleteAll'])->name('productCatalogue.deleteAll');
     Route::delete('/product/catalogue/delete/{id}', [ProductCatalogueController::class, 'delete'])->name('productCatalogue.destroy')->where(['id' => '[0-9]+']);
 
+    // ATTRIBUTE CATALOGUE
+    Route::get('/attribute/catalogue', [AttributeCatalogueController::class, 'index'])->name('productCatalogue.index');
+    Route::get('/attribute/catalogue/all', [AttributeCatalogueController::class, 'all'])->name('productCatalogue.all');
+    Route::get('/attribute/catalogue/{id}', [AttributeCatalogueController::class, 'read'])->name('productCatalogue.read')->where(['id' => '[0-9]+']);
+    Route::post('/attribute/catalogue/store', [AttributeCatalogueController::class, 'store'])->name('productCatalogue.store');
+    Route::put('/attribute/catalogue/update/{id}', [AttributeCatalogueController::class, 'update'])->name('productCatalogue.update')->where(['id' => '[0-9]+']);
+    Route::delete('/attribute/catalogue/deleteAll', [AttributeCatalogueController::class, 'deleteAll'])->name('productCatalogue.deleteAll');
+    Route::delete('/attribute/catalogue/delete/{id}', [AttributeCatalogueController::class, 'delete'])->name('productCatalogue.destroy')->where(['id' => '[0-9]+']);
 
+    // ATTRIBUTE
+    Route::get('/attribute/info', [AttributeController::class, 'info'])->name('attribute.info');
+    Route::get('/attribute', [AttributeController::class, 'index'])->name('attribute.index');
+    Route::get('/attribute/all', [AttributeController::class, 'all'])->name('attribute.all');
+    Route::get('/attribute/{id}', [AttributeController::class, 'read'])->name('attribute.read')->where(['id' => '[0-9]+']);
+    Route::post('/attribute/store', [AttributeController::class, 'store'])->name('attribute.store');
+    Route::put('/attribute/update/{id}', [AttributeController::class, 'update'])->name('attribute.update')->where(['id' => '[0-9]+']);
+    Route::delete('/attribute/delete/{id}', [AttributeController::class, 'delete'])->name('attribute.destroy')->where(['id' => '[0-9]+']);
 
     // LOCATION
     Route::get('/provinces', [LocationController::class, 'provinces'])->name('provinces.index');
